@@ -15,7 +15,7 @@ jobs:
       - image: cimg/openjdk:11.0
     # Add steps to the job
     # See: https://circleci.com/docs/2.0/configuration-reference/#steps
-      - image: postgres:9.4
+      - image: postgres:lastest
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -27,7 +27,7 @@ jobs:
           PGHOST: localhost
           PGUSER: postgres
           POSTGRES_HOST_AUTH_METHOD: trust
-          DATABASE_URL: "postgres://postgres@localhost:5432/db_name"
+        #  DATABASE_URL: "postgres://postgres@localhost:5432/db_name"
           
     steps:
       # Checkout the code as the first step.
