@@ -1,0 +1,10 @@
+services:
+- postgresql
+before_script:
+- psql -c 'create database pdwdb;' -U postgres
+- psql -U postgres -d pdwdb -f script/database/ddl.sql
+#- psql -U postgres -d teste -f script/database/insert_records.sql
+language: java
+jdk:
+- openjdk11
+#script: mvn clean verify -DskipTests=false -DskipITs=false -DskipSTs=false
