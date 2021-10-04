@@ -7,4 +7,4 @@ before_script:
 language: java
 jdk:
 - openjdk11
-#script: mvn clean verify -DskipTests=false -DskipITs=false -DskipSTs=false
+script: mvn clean verify -DskipTests=false -DskipITs=false -DskipSTs=false
