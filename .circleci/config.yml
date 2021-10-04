@@ -29,7 +29,10 @@ jobs:
     steps:
       # Checkout the code as the first step.
       - checkout
-      
+      - run:
+          name: Wait for db to run
+          command: dockerize -wait tcp://localhost:5432 -timeout 1m
+  
       
       - run: sudo apt update && sudo apt install -y postgresql-client || true
       - run:
