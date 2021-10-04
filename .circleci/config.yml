@@ -28,8 +28,7 @@ jobs:
       - checkout
       
       
-      - run: sudo apt install -y postgresql-client || true
-      - run: sudo apt-cache search postgresql-client
+      - run: sudo apt update && sudo apt install -y postgresql-client || true
       - run:
           name: Criar tabelas no postgres
           command: 
