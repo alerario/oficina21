@@ -26,6 +26,12 @@ jobs:
     steps:
       # Checkout the code as the first step.
       - checkout
+      - run:
+          name: Criar tabelas no postgres
+          command: 
+                  psql -c 'create database pdwdb;' -U postgres
+                  #psql -U postgres -d pdwdb -f script/database/ddl.sql
+      
       # Use mvn clean and package as the standard maven build phase
       - run:
           name: Build
