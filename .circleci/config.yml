@@ -19,6 +19,8 @@ jobs:
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+         ports:
+          -5432:5432
         environment:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: password
@@ -27,6 +29,7 @@ jobs:
           PGUSER: circleci
           POSTGRES_HOST_AUTH_METHOD: trust
           DATABASE_URL: "postgres://postgres@localhost:5432/db_name"
+          
     steps:
       # Checkout the code as the first step.
       - checkout
