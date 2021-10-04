@@ -23,6 +23,9 @@ jobs:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: password
           POSTGRES_DB: db_name
+          PGHOST: localhost
+          PGUSER: circleci
+          POSTGRES_HOST_AUTH_METHOD: trust
     steps:
       # Checkout the code as the first step.
       - checkout
