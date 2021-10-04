@@ -26,6 +26,8 @@ jobs:
     steps:
       # Checkout the code as the first step.
       - checkout
+      
+      - run: sudo apt install -y postgresql-client || true
       - run:
           name: Criar tabelas no postgres
           command: 
