@@ -15,26 +15,28 @@ jobs:
       - image: cimg/openjdk:11.0
     # Add steps to the job
     # See: https://circleci.com/docs/2.0/configuration-reference/#steps
-      - image: postgres:latest
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    #  - image: postgres:latest
+    #    auth:
+    #      username: mydockerhub-user
+    #      password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         
-        environment:
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: password
-          POSTGRES_DB: db_name
-          PGHOST: localhost
-          PGUSER: postgres
-          POSTGRES_HOST_AUTH_METHOD: trust
-        #  DATABASE_URL: "postgres://postgres@localhost:5432/db_name"
+     #   environment:
+     #     POSTGRES_USER: postgres
+     #     POSTGRES_PASSWORD: password
+     #     POSTGRES_DB: db_name
+     #     PGHOST: localhost
+     #     PGUSER: postgres
+      #    POSTGRES_HOST_AUTH_METHOD: trust
+       # #  DATABASE_URL: "postgres://postgres@localhost:5432/db_name"
           
     steps:
+    - run:  docker run --name postgres:latest -e POSTGRES_PASSWORD=password -p 5432:5432 -d postgres
+    
       # Checkout the code as the first step.
       - checkout
-      - run:
-          name: Wait for db to run
-          command: dockerize -wait tcp://localhost:5432 -timeout 1m
+     # - run:
+      #    name: Wait for db to run
+       #   command: dockerize -wait tcp://localhost:5432 -timeout 1m
   
       
       - run: sudo apt update && sudo apt install -y postgresql-client || true
