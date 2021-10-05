@@ -30,7 +30,9 @@ jobs:
        # #  DATABASE_URL: "postgres://postgres@localhost:5432/db_name"
           
     steps:
-    - run:  docker run --name postgres -e POSTGRES_PASSWORD=password -p 5432:5432 -d postgres || true
+      - run:  
+         name: criar o banco
+         command: docker run --name postgres -e POSTGRES_PASSWORD=password -p 5432:5432 -d postgres 
     
       # Checkout the code as the first step.
       - checkout
