@@ -32,7 +32,10 @@ jobs:
     steps:
       - run:  
          name: criar o banco
-         command: docker run --name postgres -e POSTGRES_PASSWORD=password -p 5432:5432 -d postgres 
+         command: 
+                sudo apt update
+                sudo apt install docker-ce docker-ce-cli containerd.io
+                docker run --name postgres -e POSTGRES_PASSWORD=password -p 5432:5432 -d postgres 
     
       # Checkout the code as the first step.
       - checkout
