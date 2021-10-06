@@ -21,9 +21,7 @@ pipeline {
 
     stage('Script') {
       steps {
-        sh '''clear;
-ls -la;
-'''
+        sh 'ls -la'
       }
     }
 
