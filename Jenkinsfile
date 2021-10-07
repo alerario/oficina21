@@ -51,16 +51,21 @@ pipeline {
 
     stage('Criar tabelas') {
       steps {
-        sh '''echo "criar tabelas">/filas/fila.cmd; echo "psql -U postgres -p 5432 -h localhost -d teste -f script/database/ddl.sql
+        sh '''echo "echo \'criar tabelas\'">/filas/fila.cmd; echo "psql -U postgres -p 5432 -h localhost -d teste -f script/database/ddl.sql
 ">/filas/fila.cmd
 '''
       }
     }
 
-    stage('parar o banco') {
+    stage('timer') {
       steps {
-        sh '''
-echo "sudo docker stop  post_test">/filas/fila.cmd
+        sleep 30
+      }
+    }
+
+    stage('Parar banco') {
+      steps {
+        sh '''echo "sudo docker stop  post_test">/filas/fila.cmd
 '''
       }
     }
