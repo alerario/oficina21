@@ -27,7 +27,7 @@ pipeline {
 
     stage('Docker Postgres') {
       steps {
-        sh '''echo "sudo docker run --name post_test -p 5432:5432 -e POSTGRES_PASSWORD=password -e POSTGRES_HOST_AUTH_METHOD=trust postgres:latest">/home/utfpr/filas/fila.cmd
+        sh '''echo "sudo docker run --name post_test -p 5432:5432 -e POSTGRES_PASSWORD=password -e POSTGRES_HOST_AUTH_METHOD=trust postgres:latest">/filas/fila.cmd
 '''
       }
     }
