@@ -47,7 +47,9 @@ pipeline {
 
     stage('apagar container banco') {
       steps {
-        sh 'echo "sudo docker rm post_test">/filas/fila.cmd'
+        sh '''
+echo "echo docker rm ==="> /filas/fila.cmd;
+echo "sudo docker rm post_test">/filas/fila.cmd'''
       }
     }
 
