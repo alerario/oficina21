@@ -27,7 +27,7 @@ pipeline {
 
     stage('Docker Postgres') {
       steps {
-        sh 'ls /'
+        sh 'ls /filas'
       }
     }
 
