@@ -33,8 +33,19 @@ pipeline {
     }
 
     stage('Teste com o BD') {
-      steps {
-        sh 'mvn test'
+      parallel {
+        stage('Teste com o BD') {
+          steps {
+            sh 'mvn test'
+          }
+        }
+
+        stage('criar o banco') {
+          steps {
+            sh 'psql -c \'create database teste;\' -U postgres -p 5432 -h localhost'
+          }
+        }
+
       }
     }
 
