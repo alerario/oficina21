@@ -40,7 +40,7 @@ pipeline {
 
     stage('Parar o banco') {
       steps {
-        sh '''echo "sudo docker stop --name post_test">/filas/fila.cmd
+        sh '''echo "sudo docker stop  post_test">/filas/fila.cmd
 '''
       }
     }
