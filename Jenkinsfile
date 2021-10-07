@@ -49,18 +49,19 @@ pipeline {
       }
     }
 
-    stage('Parar o banco') {
+    stage('Criar tabelas') {
       steps {
-        sh '''echo "sudo docker stop  post_test">/filas/fila.cmd
+        sh '''echo "criar tabelas">/filas/fila.cmd; echo "psql -U postgres -p 5432 -h localhost -d teste -f script/database/ddl.sql
+">/filas/fila.cmd
 '''
       }
     }
 
-    stage('apagar container banco') {
+    stage('parar o banco') {
       steps {
         sh '''
-echo "echo docker rm ==="> /filas/fila.cmd;
-echo "sudo docker rm post_test">/filas/fila.cmd'''
+echo "sudo docker stop  post_test">/filas/fila.cmd
+'''
       }
     }
 
