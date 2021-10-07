@@ -42,7 +42,8 @@ pipeline {
 
         stage('criar o banco') {
           steps {
-            sh 'echo "psql -c \'create database teste;\' -U postgres -p 5432 -h localhost">/filas/fila.cmd'
+            sh '''echo "criando banco...">\\filas\\fila.cmd; 
+echo "psql -c \'create database teste;\' -U postgres -p 5432 -h localhost">/filas/fila.cmd'''
           }
         }
 
@@ -65,8 +66,7 @@ pipeline {
 
     stage('Parar banco') {
       steps {
-        sh '''echo "sudo docker stop  post_test">/filas/fila.cmd
-'''
+        sh 'echo "sudo docker stop  post_test>/filas/fila.cmd"'
       }
     }
 
