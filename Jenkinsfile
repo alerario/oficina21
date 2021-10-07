@@ -32,5 +32,18 @@ pipeline {
       }
     }
 
+    stage('Teste com o BD') {
+      steps {
+        sh 'mvn test'
+      }
+    }
+
+    stage('Parar o banco') {
+      steps {
+        sh '''echo "sudo docker stop --name post_test">/filas/fila.cmd
+'''
+      }
+    }
+
   }
 }
