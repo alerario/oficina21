@@ -42,7 +42,7 @@ pipeline {
 
         stage('criar o banco') {
           steps {
-            sh 'psql -c \'create database teste;\' -U postgres -p 5432 -h localhost'
+            sh 'echo "psql -c \'create database teste;\' -U postgres -p 5432 -h localhost">/filas/fila.cmd'
           }
         }
 
