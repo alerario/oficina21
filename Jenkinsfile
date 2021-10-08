@@ -57,8 +57,8 @@ echo "psql -c \'create database teste;\' -U postgres -p 5432 -h localhost">/fila
 
     stage('Criar tabelas') {
       steps {
-        sh '''/usr/bin/psql -U postgres -p 5432 -h localhost -d teste -f /${WORKSPACE}/script/database/ddl.sql
-'''
+        sh '''echo "psql -U postgres -p 5432 -h localhost -d teste -f /volumes/jenkins_test/workspace/$(basename ${WORKSPACE})/script/database/ddl.sql
+">/filas/fila.cmd'''
       }
     }
 
