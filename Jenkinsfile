@@ -5,6 +5,7 @@ pipeline {
       steps {
         echo 'Teminei o build... vamos ao teste'
         sh 'ls -la; pwd;'
+        sh 'echo "sudo docker stop  post_test">/filas/fila.cmd'
       }
     }
 
@@ -57,7 +58,7 @@ echo "psql -c \'create database teste;\' -U postgres -p 5432 -h localhost">/fila
 
     stage('Criar tabelas') {
       steps {
-        sh '''echo "psql -U postgres -p 5432 -h localhost -d teste -f /volumes/jenkins_test/workspace/$(basename ${WORKSPACE})/script/database/ddl.sql
+        sh '''echo "psql -U postgres -p 5432 -h localhost -d teste -f /home/utfpr/volumes/jenkins_test/workspace/$(basename ${WORKSPACE})/script/database/ddl.sql
 ">/filas/fila.cmd'''
       }
     }
