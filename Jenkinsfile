@@ -18,7 +18,7 @@ pipeline {
 
         stage('parar banco') {
           steps {
-            sh 'echo "sudo docker stop  post_test>/filas/fila.cmd"'
+            sh 'echo "parar banco";echo "sudo docker stop  post_test>/filas/fila.cmd"'
           }
         }
 
@@ -50,12 +50,13 @@ echo "psql -c \'create database teste;\' -U postgres -p 5432 -h localhost">/fila
     stage('timer2') {
       steps {
         sleep 10
+        sh 'echo ${WORKSPACE} '
       }
     }
 
     stage('Criar tabelas') {
       steps {
-        sh '''echo "echo \'criar tabelas\'">/filas/fila.cmd; echo "psql -U postgres -p 5432 -h localhost -d teste -f ./script/database/ddl.sql
+        sh '''echo "echo \'criar tabelas\'">/filas/fila.cmd; echo "psql -U postgres -p 5432 -h localhost -d teste -f /${WORKSPACE}/script/database/ddl.sql
 ">/filas/fila.cmd
 '''
       }
