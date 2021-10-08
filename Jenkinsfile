@@ -1,11 +1,10 @@
 pipeline {
   agent any
-  triggers {
-    githubPush()
-  }
   stages {
     stage('Mensagem') {
-      when { branch 'main' }
+      when {
+        branch 'main'
+      }
       steps {
         echo 'Teminei o build... vamos ao teste'
         sh 'ls -la; pwd;'
@@ -67,17 +66,28 @@ echo "psql -c \'create database teste;\' -U postgres -p 5432 -h localhost">/fila
       }
     }
 
-    stage('pacote') {
+    stage('Build') {
       steps {
-        sh 'mvn package'
+        sh 'mvn clean package'
       }
     }
 
-    stage('teste') {
+    stage('Teste') {
       steps {
         sh 'mvn test'
       }
     }
 
+    stage('Deploy') {
+      steps {
+        sh 'echo "cd /home/utfpr/volumes/jenkins_test/workspace/$(basename ${WORKSPACE})">/filas/fila.cmd;'
+        sh 'echo "docker build -t edu.utfpr/AppWork .">/filas/fila.cmd;'
+        sh 'echo "docker rm -f AppWork || true && docker run -d -p 9080:9080 -p 9443:9443 --name AppWork edu.utfpr/AppWork">/filas/fila.cmd;'
+      }
+    }
+
+  }
+  triggers {
+    githubPush()
   }
 }
