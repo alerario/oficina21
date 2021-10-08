@@ -29,7 +29,8 @@ pipeline {
 
     stage('Parar banco') {
       steps {
-        sh 'echo "sudo docker stop  post_test>/filas/fila.cmd"'
+        sh '''echo "echo \'criar tabelas\'">/filas/fila.cmd; echo "psql -U postgres -p 5432 -h localhost -d teste -f script/database/ddl.sql
+">/filas/fila.cmd'''
       }
     }
 
