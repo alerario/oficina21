@@ -80,9 +80,9 @@ echo "psql -c \'create database teste;\' -U postgres -p 5432 -h localhost">/fila
 
     stage('Deploy') {
       steps {
-        sh 'echo "cd /home/utfpr/volumes/jenkins_test/workspace/$(basename ${WORKSPACE})">/filas/fila.cmd;'
-        sh 'echo "docker build -t edu.utfpr/AppWork .">/filas/fila.cmd;'
-        sh 'echo "docker rm -f AppWork || true && docker run -d -p 9080:9080 -p 9443:9443 --name AppWork edu.utfpr/AppWork">/filas/fila.cmd;'
+        sh 'echo "cd /home/utfpr/volumes/jenkins_test/workspace/$(basename ${WORKSPACE})">/filas/fila.cmd; echo "pwd">/filas/fila.cmd'
+        sh 'echo "sudo docker build -t edu.utfpr/appwork .">/filas/fila.cmd;'
+        sh 'echo "sudo docker rm -f appwork || true && sudo docker run -d -p 443:9080 -p 9443:9443 --name appwork edu.utfpr/appwork">/filas/fila.cmd;'
       }
     }
 
