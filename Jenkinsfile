@@ -1,8 +1,8 @@
 pipeline {
   agent any
   stages {
-    when { branch 'main' }
     stage('Mensagem') {
+      when { branch 'main' }
       steps {
         echo 'Teminei o build... vamos ao teste'
         sh 'ls -la; pwd;'
