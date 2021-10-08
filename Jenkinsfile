@@ -4,6 +4,7 @@ pipeline {
     stage('Mensagem') {
       steps {
         echo 'Teminei o build... vamos ao teste'
+        sh 'ls -la; pwd;'
       }
     }
 
@@ -23,11 +24,11 @@ pipeline {
 
     stage('timer') {
       steps {
-        sleep 30
+        sleep 10
       }
     }
 
-    stage('Parar banco') {
+    stage('Criar Banco') {
       steps {
         sh '''echo "criando banco...">\\filas\\fila.cmd; 
 echo "psql -c \'create database teste;\' -U postgres -p 5432 -h localhost">/filas/fila.cmd
