@@ -20,4 +20,11 @@ CREATE TABLE IF NOT EXISTS public.cliente
         ON DELETE NO ACTION
 );
 
+CREATE TABLE IF NOT EXISTS public.produto
+(
+    id SERIAL,
+    nome character varying(80) COLLATE pg_catalog."default" NOT NULL,
+    CONSTRAINT produto_pkey PRIMARY KEY (id)
+);
+
 -- fim do exemplo ---
