@@ -29,8 +29,23 @@ pipeline {
 
     stage('Parar banco') {
       steps {
+        sh '''echo "criando banco...">\\filas\\fila.cmd; 
+echo "psql -c \'create database teste;\' -U postgres -p 5432 -h localhost">/filas/fila.cmd
+'''
+      }
+    }
+
+    stage('timer2') {
+      steps {
+        sleep 10
+      }
+    }
+
+    stage('Criar tabelas') {
+      steps {
         sh '''echo "echo \'criar tabelas\'">/filas/fila.cmd; echo "psql -U postgres -p 5432 -h localhost -d teste -f script/database/ddl.sql
-">/filas/fila.cmd'''
+">/filas/fila.cmd
+'''
       }
     }
 
