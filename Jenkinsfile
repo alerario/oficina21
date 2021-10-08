@@ -51,6 +51,7 @@ echo "psql -c \'create database teste;\' -U postgres -p 5432 -h localhost">/fila
       steps {
         sleep 10
         sh 'echo ${WORKSPACE} '
+        sh 'echo $(basename ${WORKSPACE})'
       }
     }
 
