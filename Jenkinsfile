@@ -63,5 +63,17 @@ echo "psql -c \'create database teste;\' -U postgres -p 5432 -h localhost">/fila
       }
     }
 
+    stage('pacote') {
+      steps {
+        sh 'mvn package'
+      }
+    }
+
+    stage('teste') {
+      steps {
+        sh 'mvn test'
+      }
+    }
+
   }
 }
