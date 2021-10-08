@@ -56,8 +56,7 @@ echo "psql -c \'create database teste;\' -U postgres -p 5432 -h localhost">/fila
 
     stage('Criar tabelas') {
       steps {
-        sh '''echo "echo \'criar tabelas\'">/filas/fila.cmd; echo "psql -U postgres -p 5432 -h localhost -d teste -f /${WORKSPACE}/script/database/ddl.sql
-">/filas/fila.cmd
+        sh '''psql -U postgres -p 5432 -h localhost -d teste -f /${WORKSPACE}/script/database/ddl.sql
 '''
       }
     }
