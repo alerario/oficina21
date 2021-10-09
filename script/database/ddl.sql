@@ -1,6 +1,14 @@
 -- crie o BD oficina 
 -- Exemplo de criacao de tabelas
     
+CREATE TABLE IF NOT EXISTS public.teste
+(
+    id SERIAL,
+    nome character varying(80) COLLATE pg_catalog."default" NOT NULL,
+    CONSTRAINT teste_key PRIMARY KEY (id)
+);
+
+
 CREATE TABLE IF NOT EXISTS public.cidade
 (
     id SERIAL,
@@ -28,3 +36,8 @@ CREATE TABLE IF NOT EXISTS public.produto
 );
 
 -- fim do exemplo ---
+
+INSERT INTO teste (nome) VALUES ('Alexandre');
+INSERT INTO teste (nome) VALUES ('Flávia');
+INSERT INTO teste (nome) VALUES ('Laura');
+INSERT INTO teste (nome) VALUES ('Rita');
