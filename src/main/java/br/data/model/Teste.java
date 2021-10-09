@@ -40,7 +40,7 @@ public class Teste implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 60)
-    @Column(name = "name")
+    @Column(name = "nome")
     private String name;
   
     public Teste() {

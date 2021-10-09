@@ -7,6 +7,16 @@
     </h:head>
     <h:body>
         Hello from Facelets
+        <h:form>
+            <h:dataTable value="#{jsfTeste.all}" var="tst">
+                <h:column>
+                    <h:outputText value="#{tst.id}"/>
+                </h:column>
+                <h:column>
+                    <h:outputText value="#{tst.name}"/>
+                </h:column>
+            </h:dataTable>
+        </h:form>
     </h:body>
 </html>
 
