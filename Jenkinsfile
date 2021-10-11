@@ -86,6 +86,12 @@ echo "psql -c \'create database teste;\' -U postgres -p 5432 -h localhost">/fila
       }
     }
 
+    stage('') {
+      steps {
+        echo 'Concluido'
+      }
+    }
+
   }
   triggers {
     githubPush()
