@@ -8,7 +8,7 @@ pipeline {
       steps {
         echo 'Teminei o build... vamos ao teste'
         sh 'ls -la; pwd;'
-        sh 'echo "sudo docker stop  post_test">/filas/fila.cmd'
+        sh 'echo "sudo docker stop  docker_test">/filas/fila.cmd'
       }
     }
 
@@ -29,9 +29,9 @@ pipeline {
       }
     }
 
-    stage('Docker Postgres') {
+    stage('Docker MongoDB') {
       steps {
-        sh '''echo "sudo docker run --name post_test --rm -d -p 5432:5432 -e POSTGRES_PASSWORD=password -e POSTGRES_HOST_AUTH_METHOD=trust postgres:latest">/filas/fila.cmd
+        sh '''echo "sudo docker run --name docker_test --rm -d -p 27017:27017 mongo:latest">/filas/fila.cmd
 '''
         echo 'Comando enviado para o servidor'
       }
@@ -46,7 +46,7 @@ pipeline {
     stage('Criar Banco') {
       steps {
         sh '''echo "criando banco...">\\filas\\fila.cmd; 
-echo "psql -c \'create database teste;\' -U postgres -p 5432 -h localhost">/filas/fila.cmd
+echo "mongo  mongodb://localhost:27017/testeDB /home/utfpr/volumes/jenkins_test/workspace/$(basename ${WORKSPACE})/script/database/ddl.js">/filas/fila.cmd
 '''
       }
     }
@@ -86,7 +86,7 @@ echo "psql -c \'create database teste;\' -U postgres -p 5432 -h localhost">/fila
       }
     }
 
-    stage('') {
+    stage('error') {
       steps {
         echo 'Concluido'
       }
