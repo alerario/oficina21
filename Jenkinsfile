@@ -14,7 +14,7 @@ echo "sudo docker stop mongo_test">/filas/fila.cmd'''
       }
     }
 
-    stage('Script') {
+    stage('Builder/BD') {
       parallel {
         stage('Check folder') {
           steps {
@@ -38,14 +38,7 @@ echo "sudo docker stop mongo_test">/filas/fila.cmd'''
       }
     }
 
-    stage('Aguardar banco') {
-      steps {
-        echo 'Aguardando docker mongo...'
-        sleep 10
-      }
-    }
-
-    stage('Criar Banco/Collectio') {
+    stage('Criar Collection') {
       steps {
         echo 'Aguardar banco'
         sleep 3
@@ -66,7 +59,7 @@ echo "sudo docker stop mongo_test">/filas/fila.cmd'''
       steps {
         sh 'echo "cd /home/utfpr/volumes/jenkins_test/workspace/$(basename ${WORKSPACE})">/filas/fila.cmd; echo "pwd">/filas/fila.cmd'
         sh 'echo "sudo docker build -t edu.utfpr/appwork .">/filas/fila.cmd;'
-        sh 'echo "sudo docker rm -f appwork || true && sudo docker run -d -p 443:9080 -p 9443:9443 --name appwork edu.utfpr/appwork">/filas/fila.cmd;'
+        sh 'echo "sudo docker rm -f appwork || true && sudo docker run -d -p 443:9080 -p 9443:9443 -e DATABASE_URL=alerario.cp.utfpr.edu.br     --name appwork edu.utfpr/appwork">/filas/fila.cmd;'
       }
     }
 
