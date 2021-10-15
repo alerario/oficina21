@@ -1,74 +1,58 @@
 pipeline {
   agent any
   stages {
-    stage('Mensagem') {
+    stage('Conf. inicial') {
       when {
         branch 'main'
       }
       steps {
-        echo 'Teminei o build... vamos ao teste'
+        echo 'Iniciando pipeline'
         sh 'ls -la; pwd;'
-        sh 'echo "sudo docker stop  docker_test">/filas/fila.cmd'
+        sh '''
+echo "parando mongo_test" >/filas/fila.cmd;
+echo "sudo docker stop mongo_test">/filas/fila.cmd'''
       }
     }
 
     stage('Script') {
       parallel {
-        stage('Script') {
+        stage('Check folder') {
           steps {
             sh 'ls -la'
           }
         }
 
-        stage('parar banco') {
+        stage('Build ') {
           steps {
-            sh 'echo "parar banco";echo "sudo docker stop  post_test>/filas/fila.cmd"'
+            sh 'echo "Realizando build"; mvn clean package'
+          }
+        }
+
+        stage('Start MongoDB') {
+          steps {
+            sh '''echo "sudo docker run --name mongo_test --rm -d -p 27017:27017 mongo:latest">/filas/fila.cmd
+'''
           }
         }
 
       }
     }
 
-    stage('Docker MongoDB') {
+    stage('Aguardar banco') {
       steps {
-        sh '''echo "sudo docker run --name mongo_test --rm -d -p 27017:27017 mongo:latest">/filas/fila.cmd
-'''
-        echo 'Comando enviado para o servidor'
-      }
-    }
-
-    stage('timer') {
-      steps {
+        echo 'Aguardando docker mongo...'
         sleep 10
       }
     }
 
-    stage('Criar Banco') {
+    stage('Criar Banco/Collectio') {
       steps {
+        echo 'Aguardar banco'
+        sleep 3
         sh '''echo "criando banco...">\\filas\\fila.cmd; 
-echo "mongo  mongodb://localhost:27017/testeDB /home/utfpr/volumes/jenkins_test/workspace/$(basename ${WORKSPACE})/script/database/ddl.js">/filas/fila.cmd
 '''
-      }
-    }
-
-    stage('timer2') {
-      steps {
-        sleep 10
-        sh 'echo ${WORKSPACE} '
-        sh 'echo $(basename ${WORKSPACE})'
-      }
-    }
-
-    stage('Criar tabelas') {
-      steps {
-        sh '''echo "psql -U postgres -p 5432 -h localhost -d teste -f /home/utfpr/volumes/jenkins_test/workspace/$(basename ${WORKSPACE})/script/database/ddl.sql
-">/filas/fila.cmd'''
-      }
-    }
-
-    stage('Build') {
-      steps {
-        sh 'mvn clean package'
+        sh '''echo "mongo  mongodb://localhost:27017/testeDB /home/utfpr/volumes/jenkins_test/workspace/$(basename ${WORKSPACE})/script/database/ddl.js">/filas/fila.cmd
+'''
       }
     }
 
@@ -86,9 +70,9 @@ echo "mongo  mongodb://localhost:27017/testeDB /home/utfpr/volumes/jenkins_test/
       }
     }
 
-    stage('error') {
+    stage('Fim') {
       steps {
-        echo 'Concluido'
+        echo 'Pipeline concluido'
       }
     }
 
