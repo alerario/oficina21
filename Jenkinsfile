@@ -31,7 +31,7 @@ pipeline {
 
     stage('Docker MongoDB') {
       steps {
-        sh '''echo "sudo docker run --name docker_test --rm -d -p 27017:27017 mongo:latest">/filas/fila.cmd
+        sh '''echo "sudo docker run --name mongo_test --rm -d -p 27017:27017 mongo:latest">/filas/fila.cmd
 '''
         echo 'Comando enviado para o servidor'
       }
