@@ -19,11 +19,12 @@ public class EjbTeste {
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
     public Collection<Teste> getAll(){
-        return new CrudTeste().getAll();
+        CrudTeste ct = new CrudTeste();
+        return ct.getAll();
     }
     
     public void create(Teste teste){
         CrudTeste crudTeste = new CrudTeste();
-        crudTeste.persist(teste);
+        crudTeste.insertOne(teste);
     }
 }
