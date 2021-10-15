@@ -40,6 +40,7 @@ public abstract class AbstractCrud<T> {
     private MongoDatabase bancoDeDados;
     private String collectionName;
     private Class classe;
+    private static DBNAMES dbNames= new DBNAMES();;
     
     public void insertOne(T objeto) {
         this.openClient();
@@ -71,7 +72,7 @@ public abstract class AbstractCrud<T> {
     }
 
     public AbstractCrud(){
-        this(DBNAMES.DB1, DBNAMES.DB1URL);
+        this(dbNames.getDB1(), dbNames.getDB1URL());
     }
     
     private boolean openClient() {

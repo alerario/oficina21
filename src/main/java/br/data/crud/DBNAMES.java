@@ -5,8 +5,7 @@
  */
 package br.data.crud;
 
-import java.util.HashMap;
-import java.util.Map;
+import lombok.Getter;
 
 /**
  *
@@ -14,8 +13,17 @@ import java.util.Map;
  */
 public class DBNAMES implements java.io.Serializable {
 
-    public static final String DB1 = "testeDB"; //banco de dados default
-    public static final String DB1URL = "localhost";
+    @Getter
+    private String DB1 = "testeDB"; //banco de dados default
 
-   
+    @Getter
+    private String DB1URL = "localhost";
+
+    public DBNAMES() {
+        String BDHost = System.getenv("DATABASE_URL"); // variavel de ambiente criada para configurar a url do banco
+        if(BDHost!=null){
+            DB1URL=BDHost;
+        }
+    }
+
 }
