@@ -21,4 +21,9 @@ public class EjbTeste {
     public Collection<Teste> getAll(){
         return new CrudTeste().getAll();
     }
+    
+    public void create(Teste teste){
+        CrudTeste crudTeste = new CrudTeste();
+        crudTeste.persist(teste);
+    }
 }

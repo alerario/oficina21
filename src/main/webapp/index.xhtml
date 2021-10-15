@@ -8,12 +8,17 @@
     <h:body>
         Hello from Facelets
         <h:form>
+            <h:inputText value="#{jsfTeste.codigo}"/>
+            <h:inputText value="#{jsfTeste.nome}"/>
+            <h:commandButton action="#{jsfTeste.add()}" />
+        </h:form>
+        <h:form>
             <h:dataTable value="#{jsfTeste.all}" var="tst">
                 <h:column>
-                    <h:outputText value="#{tst.id}"/>
+                    <h:outputText value="#{tst.codigo}"/>
                 </h:column>
                 <h:column>
-                    <h:outputText value="#{tst.name}"/>
+                    <h:outputText value="#{tst.nome}"/>
                 </h:column>
             </h:dataTable>
         </h:form>

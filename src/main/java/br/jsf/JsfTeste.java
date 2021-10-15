@@ -10,6 +10,8 @@ import java.util.Collection;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  *
@@ -31,5 +33,18 @@ public class JsfTeste {
     public Collection<Teste> getAll(){
         return ejbTeste.getAll();
     }
+    
+    public void add(){
+        Teste t = new Teste();
+        t.setCodigo(codigo);
+        t.setNome(nome);
+        ejbTeste.create(t);
+    }
+    
+    @Getter @Setter
+    private int codigo;
+    
+    @Getter @Setter
+    private String nome;
     
 }
