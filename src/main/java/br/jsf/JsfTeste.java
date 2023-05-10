@@ -18,7 +18,7 @@ import lombok.Setter;
  * @author alexandrelerario
  */
 @Named(value = "jsfTeste")
-@RequestScopedERRADO!!!!
+@RequestScoped
 public class JsfTeste {
 
     @EJB
